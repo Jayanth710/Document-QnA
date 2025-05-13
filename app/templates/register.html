@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<h1>Docuemnt QnA</h1>
+
+<form method="post" action="/register">
+    <input type="text" id="name" name="name" placeholder="name..." />
+    <input type="text" id="email" name="email" placeholder="email..." />
+    <input type="password" id="password" name="password" placeholder="password..." />
+
+    <button id="register" type="submit">Register</button>
+</form>
+
+
+<!-- <script>
+    document.getElementById("register").addEventListener("click", async (e) => {
+
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        console.log(email, password);
+
+        const response = await fetch("/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ name, email, password })
+        });
+
+        const data = await response.json();
+
+        if (data.message === "Logged in") {
+            window.location.href = "/";
+        } else {
+            alert(data.message);
+        }
+    })
+        
+</script> -->
+{% endblock %}

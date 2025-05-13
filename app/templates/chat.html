@@ -1,0 +1,39 @@
+<!-- chat.html -->
+
+{% extends "layout.html" %}
+
+{% block body %}
+<h1>Docuemnt QnA</h1>
+
+<input id="input" placeholder="Ask me anything..." />
+<div id="response"></div>
+
+<script>
+    document.getElementById("input").addEventListener("keydown", async (e) => {
+        if (e.key === "Enter") {
+            const query = e.target.value;
+            const responseDiv = document.getElementById("response");
+            responseDiv.innerHTML += `<div><strong>You:</strong> ${query}</div>`;
+            e.target.value = "";
+
+            const res = await fetch("/qna", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ query })
+            });
+
+            const reader = res.body.getReader();
+            const decoder = new TextDecoder();
+
+            let full = '';
+            while (true) {
+                const { value, done } = await reader.read();
+                if (done) break;
+                const text = decoder.decode(value);
+                full += text;
+                responseDiv.innerHTML = full;  // update live
+            }
+        }
+    });
+</script>
+{% endblock %}

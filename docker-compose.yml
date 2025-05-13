@@ -1,0 +1,21 @@
+services:
+  documind-backend:
+    container_name: documind-container
+    image: documind-qna:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - USE_FLASK_DEBUG_MODE=${USE_FLASK_DEBUG_MODE}
+      - DB_CONNECTION_STRING=${DB_CONNECTION_STRING}
+      - WEAVIATE_URL=${WEAVIATE_URL}
+      - WEAVIATE_API_KEY=${WEAVIATE_API_KEY}
+      - OLLAMA_HOST=${OLLAMA_HOST}
+    volumes:
+      - ./app:/apps/app
+      - ./models:/apps/models
+    command: /bin/bash /apps/bin/app.sh
+    mem_limit: 2g

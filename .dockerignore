@@ -1,0 +1,22 @@
+# Ignore virtual environment
+.venv/
+
+# Ignore downloaded model files
+app/models/
+
+# Ignore cached Python files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore logs and local databases
+*.log
+*.sqlite3
+
+# Ignore Mac/Windows system files
+.DS_Store
+Thumbs.db
+
+# Optional: ignore .env file (if using secrets in deployment environment)
+# .env
